@@ -30,7 +30,8 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertNotNull;
+import static java.util.Objects.requireNonNull;
+
 
 public final class Resources {
 
@@ -38,14 +39,10 @@ public final class Resources {
     }
 
     public static <T> T loadJsonResource(final String resourceName, final Class<T> classOfT) {
-        try {
-            try (final InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream(resourceName)) {
-                assertNotNull(stream);
-                try (final BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8))) {
-                    final String json = reader.lines().collect(Collectors.joining(System.lineSeparator()));
-                    return new Gson().fromJson(json, classOfT);
-                }
-            }
+        try (final InputStream stream = requireNonNull(ClassLoader.getSystemClassLoader().getResourceAsStream(resourceName));
+             final BufferedReader reader = new BufferedReader(new InputStreamReader(stream,StandardCharsets.UTF_8))) {
+                final String json = reader.lines().collect(Collectors.joining(System.lineSeparator()));
+                return new Gson().fromJson(json, classOfT);
         } catch (final IOException e) {
             throw new RuntimeException(e);
         }

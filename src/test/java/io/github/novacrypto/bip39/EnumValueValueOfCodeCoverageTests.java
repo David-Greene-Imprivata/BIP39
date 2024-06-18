@@ -40,7 +40,7 @@ public final class EnumValueValueOfCodeCoverageTests {
         superficialEnumCodeCoverage(Japanese.class);
         superficialEnumCodeCoverage(French.class);
         superficialEnumCodeCoverage(CharSequenceComparators.class);
-        superficialEnumCodeCoverage(SpongyCastlePBKDF2WithHmacSHA512.class);
+        superficialEnumCodeCoverage(BouncyCastlePBKDF2WithHmacSHA512.class);
         superficialEnumCodeCoverage(JavaxPBKDF2WithHmacSHA512.class);
         superficialEnumCodeCoverage(Words.class);
     }
